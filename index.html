@@ -1,0 +1,28 @@
+ <html>
+  <head>
+    <script src="https://unpkg.com/@rive-app/canvas@1.0.79"></script>
+    <script>
+      const canvasElement = document.getElementById('canvas');
+      console.log(canvasElement)
+      
+      const r = new rive.Rive({
+        src: 'https://divine-breeze-6813.on.fleek.co/static/media/all_nfts.b2071db9dda8edbced95.riv',
+        canvas: canvasElement,
+        autoplay: true,
+        artboard: 'NFT Artboard',
+        stateMachines: 'Misc',
+        fit: rive.Fit.cover,
+        onLoad: (_) => {
+            // Get the inputs via the name of the state machine
+            const inputs = r.stateMachineInputs('Misc');
+            // Find the input you want to set a value for, or trigger
+            const skinID = inputs.find(i => i.name === 'Skin ID');
+            skinID.value = canvasElement.dataset['skin'];
+        },
+      });
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas" data-skin="2"></canvas>
+  </body>
+</html>
