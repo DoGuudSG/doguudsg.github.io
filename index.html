@@ -4,6 +4,22 @@
     <script>
       locationHandler();
       const canvasElement = createElementOnDom('canvas', 'canvasElement');
+      canvasElement.width = 640;
+      canvasElement.height = 960;
+     
+      window.addEventListener("hashchange", locationHandler);
+     
+      var skinValue = 0
+      async function locationHandler() {
+        var location = window.location.hash.replace("#", "");
+        console.log('location', location);
+        if (location == '/1') {
+          skinValue = "1";
+        }
+        else if (location == '/2') {
+          skinValue = "2";
+        }
+      }
       
       const r = new rive.Rive({
         src: 'https://divine-breeze-6813.on.fleek.co/static/media/all_nfts.b2071db9dda8edbced95.riv',
@@ -20,12 +36,6 @@
             skinID.value = "1"; // canvasElement.dataset['skin'];
         },
       });
-      window.addEventListener("hashchange", locationHandler);
-     
-      async function locationHandler() {
-        var location = window.location.hash.replace("#", "");
-        console.log('location', location);
-      }
 
       function createElementOnDom(type, id) {
         var element = document.createElement(type);
