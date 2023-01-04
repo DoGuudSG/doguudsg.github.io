@@ -1,49 +1,45 @@
- <html>
+<html>
   <head>
+    <script src="https://cdn.jsdelivr.net/npm/@rive-app/canvas@1.0.97/rive.min.js"></script>
   </head>
   <body>
-    <canvas id="canvasElement" width="640" height="960"></canvas>
-    <script src="https://unpkg.com/rive-js@0.7.16/dist/rive.min.js"></script>
-    <script>
+   <canvas id="canvasElement" width="640" height="960"></canvas>
+   <script>
+      var skinValue = "0";
       locationHandler();
-      /*
-      const canvasElement = createElementOnDom('canvas', 'canvasElement');
-      canvasElement.width = 640;
-      canvasElement.height = 960;
-      */
-      const canvas = document.getElementById('canvasElement');
-     
-      window.addEventListener("hashchange", locationHandler);
-     
-      var skinValue = 0
-      async function locationHandler() {
-        var location = window.location.hash.replace("#/", "");
-        skinValue = Number(location);
-        console.log('skinValue', skinValue);
-      }
-      
+
       const r = new rive.Rive({
         src: 'https://divine-breeze-6813.on.fleek.co/static/media/all_nfts.b2071db9dda8edbced95.riv',
-        canvas: canvas,
+        canvas: canvasElement,
         autoplay: true,
         artboard: 'NFT Artboard',
         stateMachines: 'Misc',
         fit: rive.Fit.cover,
         onLoad: (_) => {
-          // Get the inputs via the name of the state machine
-          const inputs = r.stateMachineInputs('Misc');
-          // Find the input you want to set a value for, or trigger
-          const skinID = inputs.find(i => i.name === 'Skin ID');
-          skinID.value = skinValue; // canvasElement.dataset['skin'];
+          setSkin();
         },
       });
-      /*
-      function createElementOnDom(type, id) {
-        var element = document.createElement(type);
-        element.id = id;
-        return element;
+
+      function setSkin() {
+        // Get the inputs via the name of the state machine
+        const inputs = r.stateMachineInputs('Misc');
+        // Find the input you want to set a value for, or trigger
+        const skinID = inputs.find(i => i.name === 'Skin ID');
+        skinID.value = skinValue; // canvasElement.dataset['skin'];
       }
-      */
+        
+      async function locationHandler() {
+        var location = window.location.hash.replace("#/", "");
+        var reg = new RegExp('/^\d+$/');
+        console.log('location', location);
+        if (reg.test(location)) {
+          skinValue = Number(location);
+          console.log('skinValue', skinValue);
+          setSkin();
+        }
+      }
     </script>
+  </head>
+  <body>
   </body>
 </html>
