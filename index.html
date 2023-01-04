@@ -3,7 +3,7 @@
   </head>
   <body>
     <canvas id="canvasElement" width="640" height="960"></canvas>
-    <script src="rive.min.js"></script>
+    <script src="https://unpkg.com/rive-js@0.7.16/dist/rive.min.js"></script>
     <script>
       locationHandler();
       /*
@@ -17,15 +17,9 @@
      
       var skinValue = 0
       async function locationHandler() {
-        var location = window.location.hash.replace("#", "");
-        console.log('location', location);
-        if (location == '/1') {
-          skinValue = 1;
-        }
-        else if (location == '/2') {
-          skinValue = 2;
-        }
-        reloadSkin();
+        var location = window.location.hash.replace("#/", "");
+        skinValue = Number(location);
+        console.log('skinValue', skinValue);
       }
       
       const r = new rive.Rive({
@@ -36,19 +30,13 @@
         stateMachines: 'Misc',
         fit: rive.Fit.cover,
         onLoad: (_) => {
-          reloadSkin();
-        },
-      });
-
-      function reloadSkin() {
-        if (r) {
           // Get the inputs via the name of the state machine
           const inputs = r.stateMachineInputs('Misc');
           // Find the input you want to set a value for, or trigger
           const skinID = inputs.find(i => i.name === 'Skin ID');
           skinID.value = skinValue; // canvasElement.dataset['skin'];
-        }
-      }
+        },
+      });
       /*
       function createElementOnDom(type, id) {
         var element = document.createElement(type);
