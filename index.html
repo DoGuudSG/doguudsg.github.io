@@ -8,6 +8,8 @@
       const canvasElement = createElementOnDom('canvas', 'canvasElement');
       canvasElement.width = 640;
       canvasElement.height = 960;
+
+      const canvas = document.getElementById('canvasElement');
      
       window.addEventListener("hashchange", locationHandler);
      
@@ -25,7 +27,7 @@
       
       const r = new rive.Rive({
         src: 'https://divine-breeze-6813.on.fleek.co/static/media/all_nfts.b2071db9dda8edbced95.riv',
-        canvas: canvasElement,
+        canvas: canvas,
         autoplay: true,
         artboard: 'NFT Artboard',
         stateMachines: 'Misc',
