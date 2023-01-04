@@ -30,7 +30,7 @@
         
       async function locationHandler() {
         var location = window.location.hash.replace("#/", "");
-        var reg = new RegExp('/^\d+$/');
+        var reg = new RegExp('^[0-9]*$');
         console.log('location', location);
         if (reg.test(location)) {
           skinValue = Number(location);
