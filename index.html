@@ -41,11 +41,13 @@
       });
 
       function reloadSkin() {
-        // Get the inputs via the name of the state machine
-        const inputs = r.stateMachineInputs('Misc');
-        // Find the input you want to set a value for, or trigger
-        const skinID = inputs.find(i => i.name === 'Skin ID');
-        skinID.value = skinValue; // canvasElement.dataset['skin'];
+        if (r) {
+          // Get the inputs via the name of the state machine
+          const inputs = r.stateMachineInputs('Misc');
+          // Find the input you want to set a value for, or trigger
+          const skinID = inputs.find(i => i.name === 'Skin ID');
+          skinID.value = skinValue; // canvasElement.dataset['skin'];
+        }
       }
       /*
       function createElementOnDom(type, id) {
