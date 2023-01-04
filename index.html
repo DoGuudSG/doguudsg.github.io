@@ -2,13 +2,15 @@
   <head>
   </head>
   <body>
+    <canvas id="canvasElement" width="640" height="960"></canvas>
     <script src="rive.min.js"></script>
     <script>
       locationHandler();
+      /*
       const canvasElement = createElementOnDom('canvas', 'canvasElement');
       canvasElement.width = 640;
       canvasElement.height = 960;
-
+      */
       const canvas = document.getElementById('canvasElement');
      
       window.addEventListener("hashchange", locationHandler);
@@ -40,12 +42,13 @@
             skinID.value = skinValue; // canvasElement.dataset['skin'];
         },
       });
-
+      /*
       function createElementOnDom(type, id) {
         var element = document.createElement(type);
         element.id = id;
         return element;
       }
+      */
     </script>
   </body>
 </html>
