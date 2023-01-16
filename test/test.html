@@ -3,7 +3,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@rive-app/canvas@1.0.97/rive.min.js"></script>
     <style>
       #canvasElement {
-        height: 100%;
+        width: 100%;
         padding: 0;
         margin: auto;
         display: block;
@@ -14,7 +14,7 @@
    <canvas id="canvasElement" width="640" height="960"></canvas>
    <script>
       var skinValue = "0";
-      queryHandler();
+      locationHandler();
 
       const r = new rive.Rive({
         src: 'https://divine-breeze-6813.on.fleek.co/static/media/all_nfts.b2071db9dda8edbced95.riv',
@@ -36,16 +36,12 @@
         skinID.value = skinValue; // canvasElement.dataset['skin'];
       }
         
-      async function queryHandler() {
-        const params = new Proxy(new URLSearchParams(window.location.search), {
-          get: (searchParams, prop) => searchParams.get(prop),
-        });
-        // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-        let id = params.id; // "some_value"
+      async function locationHandler() {
+        var location = window.location.hash.replace("#/", "");
         var reg = new RegExp('^[0-9]*$');
-        console.log('id', id);
-        if (reg.test(id)) {
-          skinValue = Number(id);
+        console.log('location', location);
+        if (reg.test(location)) {
+          skinValue = Number(location);
           console.log('skinValue', skinValue);
           setSkin();
         }
